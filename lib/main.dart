@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       routes: {
         '/splashscreen': (context) => SplashScreen(),
-        '/signuppage': (context) => LoginPage(),
+        '/signuppage': (context) => LoginPage(), //yess
       },
     );
   }
