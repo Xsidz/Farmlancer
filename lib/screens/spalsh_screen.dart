@@ -1,6 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'package:farmlancer/pages/login_page.dart';
+import 'package:farmlancer/notifications/loc_permission.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -27,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(Duration(seconds: 2), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
     });
@@ -63,6 +61,6 @@ class HomeScreen extends StatelessWidget {
   // Replace this with your actual home screen widget.
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return LocPermission();
   }
 }
