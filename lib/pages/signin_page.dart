@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+// import 'package:farmlancer/pages/signup_page.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
-  const SigninPage({super.key});
+  final Function()?onTap;
+  const SigninPage({super.key, required this.onTap});
 
   @override
   State<SigninPage> createState() => _SigninPageState();
+
+  
 }
 
 class _SigninPageState extends State<SigninPage> {
@@ -16,6 +22,45 @@ class _SigninPageState extends State<SigninPage> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  final _emailcontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
+
+  Future SignIn() async {
+         
+         showDialog(context: context, builder: (context){
+            return const Center(child: CircularProgressIndicator(),);
+         });
+
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim());
+    } on FirebaseAuthException catch (e) {
+       Navigator.pop(context);
+       ShowError(e.code);
+    }
+    Navigator.pop(context);
+  }
+
+  void ShowError(String message) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Center(child: Text(message),),
+        
+      );
+    });
+}
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,7 +124,7 @@ class _SigninPageState extends State<SigninPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Mobile Number",
+                          "Email Id",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16.0,
@@ -89,6 +134,7 @@ class _SigninPageState extends State<SigninPage> {
                           height: 8,
                         ),
                         TextField(
+                          controller: _emailcontroller,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.black12),
@@ -96,7 +142,7 @@ class _SigninPageState extends State<SigninPage> {
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(8)),
-                              hintText: "Enter Your Mobile Number",
+                              hintText: "Enter Your Email",
                               hintStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromRGBO(196, 196, 196, 1))),
@@ -126,6 +172,7 @@ class _SigninPageState extends State<SigninPage> {
                           height: 8,
                         ),
                         TextField(
+                          controller: _passwordcontroller,
                           obscureText: _obscureText,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
@@ -233,7 +280,7 @@ class _SigninPageState extends State<SigninPage> {
                   ),
 
                   ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () => {SignIn()},
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -267,7 +314,7 @@ class _SigninPageState extends State<SigninPage> {
                           'lib/assets/1.png',
                           height: 40,
                         ),
-                        onTap: (){},
+                        onTap: () {},
                       )
                     ],
                   ),
@@ -280,16 +327,20 @@ class _SigninPageState extends State<SigninPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don’t have an account?", style: TextStyle(color: const Color.fromRGBO(117, 117, 117, 1)),),
+                      Text(
+                        "Don’t have an account?",
+                        style: TextStyle(
+                            color: const Color.fromRGBO(117, 117, 117, 1)),
+                      ),
                       const SizedBox(
                         width: 8,
                       ),
-              
-                      GestureDetector(onTap: (){
-                        Navigator.pushNamed(context, '/signup');
-                      },
-                      child:Text("Create Account", style: TextStyle(color: const Color.fromRGBO(0, 70, 67, 1), fontWeight: FontWeight.w600))),
-                      
+                      GestureDetector(
+                          onTap: widget.onTap,
+                          child: Text("Create Account",
+                              style: TextStyle(
+                                  color: const Color.fromRGBO(0, 70, 67, 1),
+                                  fontWeight: FontWeight.w600))),
                     ],
                   )
                 ],

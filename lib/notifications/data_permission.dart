@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 
+import 'package:farmlancer/pages/main_page.dart';
+import 'package:farmlancer/pages/signin_page.dart';
 import 'package:flutter/material.dart';
 
 class Data extends StatelessWidget {
@@ -107,7 +109,7 @@ class Data extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
-                   Navigator.pushNamed(context, '/signin');
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
                   },
                   style: ElevatedButton.styleFrom(
                       minimumSize: Size(250, 44),

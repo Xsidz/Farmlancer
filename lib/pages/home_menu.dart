@@ -3,10 +3,21 @@
 import 'package:farmlancer/pages/filters/Support_page.dart';
 import 'package:farmlancer/pages/filters/on_field.dart';
 import 'package:farmlancer/pages/filters/trans_port.dart';
+import 'package:farmlancer/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  
+
+ 
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +40,11 @@ class HomePage extends StatelessWidget {
                   physics: ClampingScrollPhysics(),
                   padding:
                       EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
-                  // unselectedLabelColor: Color.fromRGBO(74, 181, 90, 1),
                   unselectedLabelColor: Colors.black,
                   labelColor: Colors.white,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    // color: Colors.blue,
                   ),
                   automaticIndicatorColorAdjustment: true,
                   tabs: [
@@ -82,31 +91,21 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-           
-
-
             Expanded(
               child: TabBarView(children: [
                 OnField(),
                 TransPort(),
                 Support(),
               ]),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: ElevatedButton(child: Text('Profile'),onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));}),
             )
           ],
         ),
-
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.black),label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.cloud,color: Colors.black), label: 'Weather'),
-            BottomNavigationBarItem(icon: Icon(Icons.upload_rounded,color: Colors.black), label: "Add"),
-            BottomNavigationBarItem(icon: Icon(Icons.newspaper,color: Colors.black), label: "News"),
-            BottomNavigationBarItem(icon: Icon(Icons.person , color: Colors.black,), label: "Profile")
-
-
-
-          ],
-        ),
+       
       ),
     );
   }
