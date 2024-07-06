@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1098922081998",
-    "project_id": "farmlancerauth",
-    "storage_bucket": "farmlancerauth.appspot.com"
+    "project_number": "543684908125",
+    "project_id": "farmlancerdemo",
+    "storage_bucket": "farmlancerdemo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098922081998:android:cc7b4383727a33615e5a9f",
+        "mobilesdk_app_id": "1:543684908125:android:d7440fa2ac19d0e307e9b4",
         "android_client_info": {
-          "package_name": "com.farmlancer.app"
+          "package_name": "com.example.farmlancer"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA_QzK_rOa2u6MP0wmEAwnN1yTUiM3ktsU"
+          "current_key": "AIzaSyCcqQYyoxNmZjrjHZ7e_bLoIxnbZMtd4yA"
         }
       ],
       "services": {
